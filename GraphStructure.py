@@ -7,7 +7,7 @@ class Graph(object):
         self.num_vertices = num_vertices
         self.vertices = [i for i in range(1, num_vertices+1)]
         self.num_arcs = num_arcs
-        self.arcs = [vertice for pair in arcs for vertice in pair] 
+        self.arcs = arcs
         self.index = 0
 
     def __str__(self):
@@ -53,6 +53,14 @@ class Graph(object):
                 vertice = other
             if vertice == other:
                 vertice = one        
+
+    def copy(self):
+        new_graph = Graph(self.instance_name+"copy",
+                          self.num_vertices,
+                          self.num_arcs,
+                          self.vertices,
+                          self.arcs.copy())
+        return new_graph
 
     def __str_arcs(self):
         _str_ = "({} {})|"*(len(self.arcs)//2)

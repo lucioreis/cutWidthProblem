@@ -2,8 +2,7 @@ import os
 import pathlib as path
 import numpy as np
 from GraphStructure import Graph
-
-# import numpy as np
+from random import randint
 
 
 def pipe(*args, params=[], **kwargs):
@@ -53,6 +52,7 @@ def interpret_list(list_of_content, **kwargs):
         int(x) for x in list_of_content[1].split())
     arcs = [(int(i.split()[0]), int(i.split()[1])) for i in list_of_content[2:]]
     arcs = [(i[0], i[1]) if i[0] <= i[1] else (i[1], i[0]) for i in arcs]
+    arcs = [vertice for pair in arcs for vertice in pair] 
     return Graph(instance_name,
                  num_vertices,
                  num_arcs,
@@ -104,5 +104,11 @@ def cut_widhts(graphs, **kwargs):
     return cws
 
 
-def local_min(graph):
-    pass
+def generate_neighbor(graph, swaps=1):
+    neighbor = graph.copy()
+    for i in range(swaps):
+        neighbor.swap(randint(0, len(neighbor.vertices)))
+    return neighbor
+
+
+def 
